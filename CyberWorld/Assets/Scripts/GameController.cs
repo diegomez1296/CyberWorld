@@ -43,6 +43,9 @@ public class GameController : MonoBehaviour
         UI.Instance.PanelVisibility(UI.Panel.Control, false);
         UI.Instance.LoadingPanel.SetSliderValue(0);
 
+
+        yield return CreatePlayer(controllerSet);
+
         //yield return new WaitForSeconds(0.3f);
         AsyncOperation operation = SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
 
@@ -53,7 +56,7 @@ public class GameController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        yield return CreatePlayer(controllerSet);
+        
 
         UI.Instance.LoadingPanel.SetSliderValue(1);
         yield return new WaitForSeconds(0.3f);
