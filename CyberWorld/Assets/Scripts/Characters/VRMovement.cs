@@ -70,16 +70,9 @@ public class VRMovement : MonoBehaviour
         Vector3 direction = new Vector3(position.x, 0, position.y);
         Vector3 headRotation = new Vector3(0, head.transform.eulerAngles.y, 0);
 
-
-        Debug.Log("Quaternion.Euler(headRotation): " + Quaternion.Euler(headRotation));
-        Debug.Log("Quaternion.Euler(headRotation) * direction: " + Quaternion.Euler(headRotation) * direction);
-
-
         direction = Quaternion.Euler(headRotation) * direction;
 
         Vector3 movement = direction * speed;
-
-
         characterController.Move(movement * Time.deltaTime);
     }
 
