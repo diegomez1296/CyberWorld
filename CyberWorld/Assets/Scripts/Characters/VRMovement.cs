@@ -15,6 +15,8 @@ public class VRMovement : MonoBehaviour
     private CharacterController characterController;
     private GameObject head;
 
+    private System.DateTime dateTime;
+    private int picNumber = 0;
 
     private void Awake()
     {
@@ -55,7 +57,38 @@ public class VRMovement : MonoBehaviour
         foreach (XRController controller in controllers)
         {
             if (controller.enableInputActions)
+            {
                 CheckForMovement(controller.inputDevice);
+                CheckForSS(controller.inputDevice);
+            }
+        }
+    }
+
+    private void CheckForSS(InputDevice device)
+    {
+        if (device.TryGetFeatureValue(CommonUsages.triggerButton, out bool result))
+            CreateSS(result);
+    }
+
+
+    private void CreateSS(bool result)
+    {
+        if (result)
+        {
+            //dateTime = DateTime.Now;
+            
+            try
+            {
+                ScreenCapture.CaptureScreenshot(picNumber+".png");
+                Debug.Log(picNumber);
+            }
+            catch (Exception)
+            {
+
+                Debug.LogError(picNumber);
+            }
+            
+            picNumber++;
         }
     }
 
